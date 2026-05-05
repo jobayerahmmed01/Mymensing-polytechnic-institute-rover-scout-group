@@ -1,75 +1,62 @@
-# ময়মনসিংহ পলিটেকনিক রোভার স্কাউট গ্রুপ
+# MPIRSG - Mymensingh Polytechnic Institute Rover Scout Group
 
 Modern, responsive website built with React, TypeScript, and Tailwind CSS.
 
-## 🚀 প্রজেক্ট চালু করুন
+## 🚀 Quick Start
 
 ```bash
 npm install
 npm run dev
 ```
 
-Browser এ খুলুন: http://localhost:5173
+Open browser: http://localhost:5173
 
-## 📝 কোড এডিট করার গাইড
+## 📁 Project Structure
 
-সব section এর জন্য আলাদা README আছে:
-
-### Layout
-- **Navbar:** `src/layout/Navbar/README.md` - লোগো, মেনু, ডার্ক মোড, লগইন
-- **Footer:** `src/layout/Footer/README.md` - যোগাযোগ, social media
-
-### Sections
-- **Hero:** `src/sections/Hero/README.md` - Hero ছবি, welcome message
-- **Awards:** `src/sections/Awards/README.md` - PRS এবং Social Award ছবি
-- **Leaders:** `src/sections/Leaders/README.md` - নেতৃত্বের নাম
-- **Stats:** `src/sections/Stats/README.md` - সংখ্যাসূচক তথ্য
-- **Activities:** `src/sections/Activities/README.md` - কার্যক্রমের ছবি
-- **Notices:** `src/sections/Notices/README.md` - ঘোষণা এবং নোটিশ
-- **About:** `src/sections/About/README.md` - পরিচিতি
-- **Contact:** `src/sections/Contact/README.md` - যোগাযোগ ফর্ম
-
-## 🎯 দ্রুত এডিট
-
-### টেক্সট পরিবর্তন করতে:
 ```
-src/data/translations.ts
+src/
+├── assets/          # Images and static files
+├── components/      # Reusable UI components
+├── contexts/        # React contexts (Language)
+├── data/           # Site data and translations
+├── hooks/          # Custom React hooks
+├── layout/         # Navbar and Footer
+├── lib/            # Utility functions
+├── pages/          # Page components (Home, About, etc.)
+└── sections/       # Section components
 ```
 
-### ডেটা আপডেট করতে (নোটিশ, stats, leaders):
-```
-src/data/siteData.ts
-```
+## 🎯 Quick Edit
 
-### ছবি যোগ করতে:
-```
-src/assets/
-```
+### Change Text:
+`src/data/translations.ts`
+
+### Update Data (notices, stats, leaders):
+`src/data/siteData.ts`
+
+### Add Images:
+`src/assets/`
 
 ## 📦 Tech Stack
 
 - React 18 + TypeScript
-- Vite + Tailwind CSS
-- Shadcn UI
+- Vite
+- Tailwind CSS
 - Framer Motion
-- Swiper.js
-- React CountUp
+- React Router DOM
 
 ## 🛠️ Commands
 
 ```bash
-npm run dev       # Development
+npm run dev       # Development server
 npm run build     # Production build
-npm run preview   # Preview build
-npm run lint      # Lint code
+npm run preview   # Preview production build
 ```
 
-## 📚 বিস্তারিত গাইড
+## 🌐 Deployment
 
-প্রতিটি section এর README ফাইলে step-by-step নির্দেশনা আছে।
-
-**শুরু করুন:** `src/README.md`
+Deployed on Vercel. Push to main branch to auto-deploy.
 
 ---
 
-**Happy Coding! 🚀**
+**Made with ❤️ by MPIRSG**
