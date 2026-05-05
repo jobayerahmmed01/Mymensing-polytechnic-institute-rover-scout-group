@@ -1,4 +1,5 @@
 import { useLanguage } from "@/contexts/LanguageContext";
+import { motion } from "framer-motion";
 import type { TranslationKey } from "@/data/translations";
 
 interface ActivityCardProps {
@@ -10,21 +11,40 @@ const ActivityCard = ({ img, labelKey }: ActivityCardProps) => {
   const { t } = useLanguage();
 
   return (
-    <div className="group relative overflow-hidden rounded-2xl shadow-card aspect-[4/3] cursor-pointer">
-      <img
+    <motion.div
+      whileHover={{ y: -8 }}
+      transition={{ duration: 0.3 }}
+      className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl aspect-[4/3] cursor-pointer border-4 border-white dark:border-slate-800"
+    >
+      <motion.img
+        whileHover={{ scale: 1.1 }}
+        transition={{ duration: 0.6 }}
         src={img}
         alt={t(labelKey)}
         loading="lazy"
-        className="w-full h-full object-cover group-hover:scale-110 transition-smooth duration-500"
+        className="w-full h-full object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 p-5">
-        <span className="inline-block px-3 py-1 rounded-full bg-accent text-accent-foreground text-xs font-semibold mb-2">
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent group-hover:from-black/90 transition-all duration-500" />
+      
+      <motion.div
+        initial={{ y: 20, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        viewport={{ once: true }}
+        className="absolute bottom-0 left-0 right-0 p-3 transform group-hover:translate-y-0 transition-transform duration-300"
+      >
+        <span className="inline-block px-2 py-0.5 rounded-full bg-gradient-to-r from-primary to-accent text-white text-[10px] font-semibold mb-1 shadow-lg">
           {t(labelKey)}
         </span>
-        <h3 className="text-background font-bold text-lg">{t(labelKey)}</h3>
+        <h3 className="text-white font-bold text-sm group-hover:text-base transition-all duration-300">
+          {t(labelKey)}
+        </h3>
+      </motion.div>
+
+      {/* Shine Effect on Hover */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

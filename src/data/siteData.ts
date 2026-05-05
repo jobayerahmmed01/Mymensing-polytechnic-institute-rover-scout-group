@@ -21,14 +21,36 @@ export const stats = [
   { key: "stat_events", value: 54 },
 ] as const;
 
-export const activities = [
-  { img: camping, key: "cat_camping" },
-  { img: social, key: "cat_social" },
-  { img: training, key: "cat_training" },
-  { img: events, key: "cat_events" },
-  { img: camping, key: "cat_camping" },
-  { img: social, key: "cat_social" },
-] as const;
+// Generate 50 activity images (rover01.jpg to rover50.jpg)
+// Grouped by category: Camping first, then Social Work, Training, Events
+const generateActivities = () => {
+  const activities = [];
+  
+  // Distribute 50 images across 4 categories (12-13 each)
+  const distribution = [
+    { category: "cat_camping", count: 13 },      // rover01-13
+    { category: "cat_social", count: 13 },       // rover14-26
+    { category: "cat_training", count: 12 },     // rover27-38
+    { category: "cat_events", count: 12 }        // rover39-50
+  ];
+  
+  let imageIndex = 1;
+  
+  for (const { category, count } of distribution) {
+    for (let i = 0; i < count; i++) {
+      const imgName = `rover${String(imageIndex).padStart(2, '0')}.jpg`;
+      activities.push({
+        img: `/images/${imgName}`,
+        key: category
+      });
+      imageIndex++;
+    }
+  }
+  
+  return activities;
+};
+
+export const activities = generateActivities();
 
 export const notices = [
   {
@@ -51,5 +73,49 @@ export const notices = [
     title_en: "Tree Plantation Drive Successful",
     body_bn: "আমরা সফলভাবে ক্যাম্পাসে ৫০০টি চারা রোপণ করেছি।",
     body_en: "We successfully planted 500 saplings around the campus.",
+  },
+];
+
+// PRS Award Winners
+export const prsAwardees = [
+  {
+    name_bn: "মোঃ আব্দুল করিম",
+    name_en: "Md. Abdul Karim",
+    year: "2025",
+    image: "/placeholder.svg", // Replace with actual image path
+  },
+  {
+    name_bn: "সাদিয়া ইসলাম",
+    name_en: "Sadia Islam",
+    year: "2024",
+    image: "/placeholder.svg",
+  },
+  {
+    name_bn: "রাকিব হাসান",
+    name_en: "Rakib Hasan",
+    year: "2023",
+    image: "/placeholder.svg",
+  },
+];
+
+// Social Development Award Winners
+export const socialAwardees = [
+  {
+    name_bn: "ফাতিমা খাতুন",
+    name_en: "Fatima Khatun",
+    year: "2025",
+    image: "/placeholder.svg", // Replace with actual image path
+  },
+  {
+    name_bn: "তানভীর রহমান",
+    name_en: "Tanvir Rahman",
+    year: "2024",
+    image: "/placeholder.svg",
+  },
+  {
+    name_bn: "নাজমুল হক",
+    name_en: "Nazmul Haque",
+    year: "2023",
+    image: "/placeholder.svg",
   },
 ];
