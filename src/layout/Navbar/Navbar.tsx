@@ -55,9 +55,9 @@ const Navbar = () => {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-3 md:top-4 left-0 right-0 z-50 transition-all duration-500 flex justify-center px-3 md:px-4`}
+      className={`fixed top-3 md:top-4 left-0 right-0 z-50 transition-all duration-300 flex justify-center px-2 md:px-4`}
     >
-      <nav className={`relative backdrop-blur-2xl bg-slate-900/40 dark:bg-slate-950/40 border border-white/10 dark:border-emerald-500/20 rounded-3xl shadow-2xl px-4 md:px-6 py-3 overflow-hidden transition-all duration-500 w-full max-w-7xl`}>
+      <nav className={`relative backdrop-blur-2xl bg-slate-900/40 dark:bg-slate-950/40 border border-white/10 dark:border-emerald-500/20 rounded-3xl shadow-2xl px-3 md:px-6 py-2.5 md:py-3 overflow-hidden transition-all duration-300 w-full max-w-7xl`}>
         {/* Subtle animated gradient overlay */}
         <motion.div
           animate={{
@@ -76,32 +76,22 @@ const Navbar = () => {
         />
 
         <div className="flex items-center justify-between relative z-10">
-          <Link to="/" className="flex items-center gap-2 md:gap-3 group">
-            <motion.div 
-              whileHover={{ scale: 1.1, rotate: 360 }}
-              whileTap={{ scale: 0.9 }}
-              transition={{ duration: 0.6, type: "spring", stiffness: 200 }}
-              className="relative w-10 h-10 md:w-11 md:h-11 rounded-2xl backdrop-blur-xl bg-gradient-to-br from-emerald-500/20 to-teal-600/20 border border-emerald-400/30 shadow-lg shadow-emerald-500/20 flex items-center justify-center overflow-hidden group"
-            >
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+          <Link to="/" className="flex items-center gap-2 group">
+            <div className="relative w-9 h-9 md:w-11 md:h-11 rounded-2xl backdrop-blur-xl bg-gradient-to-br from-emerald-500/20 to-teal-600/20 border border-emerald-400/30 shadow-lg shadow-emerald-500/20 flex items-center justify-center overflow-hidden">
               <img 
                 src={logo} 
                 alt="MPIRSG logo" 
-                className="w-6 h-6 md:w-7 md:h-7 relative z-10 drop-shadow-lg" 
+                className="w-5 h-5 md:w-7 md:h-7 relative z-10 drop-shadow-lg" 
               />
-            </motion.div>
-            <motion.div 
-              className="leading-tight"
-              whileHover={{ x: 3 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
+            </div>
+            <div className="leading-tight">
               <div className="font-bold text-xs md:text-sm text-emerald-400 dark:text-emerald-300 flex items-center gap-1 drop-shadow-lg">
                 {t("siteShort")}
               </div>
               <div className="hidden sm:block text-[9px] md:text-[10px] text-gray-300 dark:text-gray-400 drop-shadow-lg">
                 {t("siteName")}
               </div>
-            </motion.div>
+            </div>
           </Link>
 
           <div className="hidden lg:flex items-center backdrop-blur-xl bg-white/5 dark:bg-white/10 rounded-2xl px-2 py-2 border border-white/10 dark:border-emerald-500/20 shadow-lg">
@@ -155,63 +145,44 @@ const Navbar = () => {
             </ul>
           </div>
 
-          <div className="flex items-center gap-2">
-            {/* Language Toggle - Ultra Modern Glassmorphism */}
-            <motion.button
+          <div className="flex items-center gap-1.5 md:gap-2">
+            {/* Language Toggle - Simplified */}
+            <button
               onClick={() => setLang(lang === "bn" ? "en" : "bn")}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="relative group"
+              className="relative group w-9 h-9 md:w-11 md:h-11"
             >
-              <div className={`relative w-11 h-11 rounded-2xl backdrop-blur-xl border transition-all duration-300 ${
+              <div className={`relative w-full h-full rounded-2xl backdrop-blur-xl border transition-all duration-300 ${
                 lang === "bn"
                   ? "bg-gradient-to-br from-blue-500/20 to-indigo-600/20 border-blue-400/30 shadow-lg shadow-blue-500/20"
                   : "bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border-cyan-400/30 shadow-lg shadow-cyan-500/20"
               }`}>
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <motion.span 
-                    key={lang}
-                    initial={{ scale: 0.5, opacity: 0, rotate: -180 }}
-                    animate={{ scale: 1, opacity: 1, rotate: 0 }}
-                    transition={{ type: "spring", stiffness: 500, damping: 25 }}
-                    className="text-xs font-bold text-white drop-shadow-lg"
-                  >
+                  <span className="text-xs font-bold text-white drop-shadow-lg">
                     {lang === "bn" ? "বাং" : "EN"}
-                  </motion.span>
+                  </span>
                 </div>
               </div>
-            </motion.button>
+            </button>
             
-            {/* Theme Toggle - Ultra Modern Glassmorphism */}
-            <motion.button
+            {/* Theme Toggle - Simplified */}
+            <button
               onClick={() => setDark((d) => !d)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="relative group"
+              className="relative group w-9 h-9 md:w-11 md:h-11"
             >
-              <div className={`relative w-11 h-11 rounded-2xl backdrop-blur-xl border transition-all duration-300 ${
+              <div className={`relative w-full h-full rounded-2xl backdrop-blur-xl border transition-all duration-300 ${
                 dark
                   ? "bg-gradient-to-br from-slate-700/30 to-slate-900/30 border-slate-600/30 shadow-lg shadow-slate-700/20"
                   : "bg-gradient-to-br from-amber-400/30 to-orange-500/30 border-amber-400/40 shadow-lg shadow-amber-500/30"
               }`}>
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <motion.div
-                    key={dark ? "dark" : "light"}
-                    initial={{ scale: 0.5, opacity: 0, rotate: -180 }}
-                    animate={{ scale: 1, opacity: 1, rotate: 0 }}
-                    transition={{ type: "spring", stiffness: 500, damping: 25 }}
-                  >
-                    {dark ? (
-                      <Moon className="w-5 h-5 text-slate-300 drop-shadow-lg" />
-                    ) : (
-                      <Sun className="w-5 h-5 text-amber-500 drop-shadow-lg" />
-                    )}
-                  </motion.div>
+                  {dark ? (
+                    <Moon className="w-4 h-4 md:w-5 md:h-5 text-slate-300 drop-shadow-lg" />
+                  ) : (
+                    <Sun className="w-4 h-4 md:w-5 md:h-5 text-amber-500 drop-shadow-lg" />
+                  )}
                 </div>
               </div>
-            </motion.button>
+            </button>
 
             {/* Login Button - Ultra Modern Glassmorphism */}
             <DropdownMenu>
