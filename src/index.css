@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Scout Theme - Light */
+    --background: 40 33% 97%;
+    --foreground: 140 30% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 140 30% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 140 30% 12%;
+
+    --primary: 142 55% 28%;
+    --primary-foreground: 40 33% 97%;
+    --primary-glow: 142 60% 42%;
+
+    --secondary: 30 35% 88%;
+    --secondary-foreground: 25 40% 22%;
+
+    --muted: 40 25% 92%;
+    --muted-foreground: 140 15% 35%;
+
+    --accent: 38 75% 55%;
+    --accent-foreground: 25 40% 15%;
+
+    --brown: 25 45% 35%;
+    --brown-foreground: 40 33% 97%;
+
+    --destructive: 0 75% 50%;
+    --destructive-foreground: 40 33% 97%;
+
+    --border: 40 20% 85%;
+    --input: 40 20% 88%;
+    --ring: 142 55% 28%;
+
+    --radius: 0.75rem;
+
+    --gradient-hero: linear-gradient(135deg, hsl(142 55% 18% / 0.85), hsl(25 45% 25% / 0.7));
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(38 80% 65%));
+    --shadow-elegant: 0 10px 40px -10px hsl(var(--primary) / 0.3);
+    --shadow-card: 0 4px 20px -8px hsl(140 30% 12% / 0.15);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 140 25% 8%;
+    --foreground: 40 30% 95%;
+    --card: 140 22% 11%;
+    --card-foreground: 40 30% 95%;
+    --popover: 140 22% 11%;
+    --popover-foreground: 40 30% 95%;
+    --primary: 142 55% 45%;
+    --primary-foreground: 140 25% 8%;
+    --primary-glow: 142 70% 55%;
+    --secondary: 25 25% 18%;
+    --secondary-foreground: 40 30% 95%;
+    --muted: 140 15% 16%;
+    --muted-foreground: 40 15% 70%;
+    --accent: 38 75% 55%;
+    --accent-foreground: 25 40% 15%;
+    --brown: 25 35% 55%;
+    --brown-foreground: 140 25% 8%;
+    --destructive: 0 70% 45%;
+    --destructive-foreground: 40 30% 95%;
+    --border: 140 15% 20%;
+    --input: 140 15% 20%;
+    --ring: 142 55% 45%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+@layer utilities {
+  .gradient-hero { background: var(--gradient-hero); }
+  .gradient-primary { background: var(--gradient-primary); }
+  .gradient-accent { background: var(--gradient-accent); }
+  .shadow-elegant { box-shadow: var(--shadow-elegant); }
+  .shadow-card { box-shadow: var(--shadow-card); }
+  .transition-smooth { transition: var(--transition-smooth); }
+
+  .scroll-marquee {
+    animation: marquee 40s linear infinite;
+  }
+  .marquee-pause:hover .scroll-marquee {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out both;
+  }
+}
