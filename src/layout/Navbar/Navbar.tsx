@@ -91,14 +91,14 @@ const Navbar = () => {
               />
             </motion.div>
             <motion.div 
-              className="hidden sm:block leading-tight"
+              className="leading-tight"
               whileHover={{ x: 3 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
               <div className="font-bold text-xs md:text-sm text-emerald-400 dark:text-emerald-300 flex items-center gap-1 drop-shadow-lg">
                 {t("siteShort")}
               </div>
-              <div className="text-[9px] md:text-[10px] text-gray-300 dark:text-gray-400 drop-shadow-lg">
+              <div className="hidden sm:block text-[9px] md:text-[10px] text-gray-300 dark:text-gray-400 drop-shadow-lg">
                 {t("siteName")}
               </div>
             </motion.div>
