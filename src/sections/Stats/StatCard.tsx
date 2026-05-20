@@ -19,10 +19,16 @@ const StatCard = ({ icon: Icon, value, labelKey }: StatCardProps) => {
         <Icon className="w-6 h-6 md:w-7 md:h-7 text-primary-foreground" />
       </div>
       
-      {/* Counter */}
-      <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-1 md:mb-2">
-        <Counter end={value} />+
-      </div>
+      {/* Counter or Placeholder */}
+      {value === 0 ? (
+        <div className="text-sm md:text-base font-semibold text-muted-foreground mb-1 md:mb-2 px-2">
+          ডাটা যুক্ত করা হয়নি
+        </div>
+      ) : (
+        <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-1 md:mb-2">
+          <Counter end={value} />+
+        </div>
+      )}
       
       {/* Label */}
       <div className="text-xs md:text-sm text-muted-foreground font-medium">

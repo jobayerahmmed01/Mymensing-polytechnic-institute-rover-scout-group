@@ -22,14 +22,25 @@ const AdminLogin = () => {
     e.preventDefault();
     setLoading(true);
 
-    // Simulate API call
+    // Simulate API call - Replace with actual API endpoint
     setTimeout(() => {
       setLoading(false);
-      toast({
-        title: "লগইন সফল হয়নি",
-        description: "এই ফিচারটি শীঘ্রই আসছে। অনুগ্রহ করে পরে চেষ্টা করুন।",
-        variant: "destructive",
-      });
+      
+      // Demo credentials check (replace with actual authentication)
+      if (formData.email === "admin@mpirsg.org" && formData.password === "admin123") {
+        toast({
+          title: "লগইন সফল!",
+          description: "স্বাগতম অ্যাডমিন! ড্যাশবোর্ডে প্রবেশ করছেন...",
+        });
+        // Redirect to admin dashboard after successful login
+        // window.location.href = "/admin/dashboard";
+      } else {
+        toast({
+          title: "লগইন ব্যর্থ",
+          description: "ইমেইল অথবা পাসওয়ার্ড ভুল। অনুগ্রহ করে আবার চেষ্টা করুন।",
+          variant: "destructive",
+        });
+      }
     }, 1500);
   };
 
@@ -145,6 +156,21 @@ const AdminLogin = () => {
 
           {/* Footer Links */}
           <div className="mt-6 text-center space-y-3">
+            {/* Demo Credentials Info */}
+            <div className="pb-3 border-b border-slate-700">
+              <p className="text-xs text-slate-400 mb-2">
+                ডেমো লগইন তথ্য:
+              </p>
+              <div className="bg-slate-900 rounded-lg p-3 text-xs text-left space-y-1">
+                <p className="text-slate-400">
+                  <span className="font-semibold">ইমেইল:</span> admin@mpirsg.org
+                </p>
+                <p className="text-slate-400">
+                  <span className="font-semibold">পাসওয়ার্ড:</span> admin123
+                </p>
+              </div>
+            </div>
+            
             <div className="pt-3 border-t border-slate-700">
               <Link
                 to="/student-login"

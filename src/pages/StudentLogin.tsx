@@ -22,14 +22,25 @@ const StudentLogin = () => {
     e.preventDefault();
     setLoading(true);
 
-    // Simulate API call
+    // Simulate API call - Replace with actual API endpoint
     setTimeout(() => {
       setLoading(false);
-      toast({
-        title: "লগইন সফল হয়নি",
-        description: "এই ফিচারটি শীঘ্রই আসছে। অনুগ্রহ করে পরে চেষ্টা করুন।",
-        variant: "destructive",
-      });
+      
+      // Demo credentials check (replace with actual authentication)
+      if (formData.studentId === "demo" && formData.password === "demo123") {
+        toast({
+          title: "লগইন সফল!",
+          description: "স্বাগতম! আপনার ড্যাশবোর্ডে প্রবেশ করছেন...",
+        });
+        // Redirect to dashboard after successful login
+        // window.location.href = "/dashboard";
+      } else {
+        toast({
+          title: "লগইন ব্যর্থ",
+          description: "স্টুডেন্ট আইডি অথবা পাসওয়ার্ড ভুল। অনুগ্রহ করে আবার চেষ্টা করুন।",
+          variant: "destructive",
+        });
+      }
     }, 1500);
   };
 
@@ -151,6 +162,22 @@ const StudentLogin = () => {
                 রেজিস্ট্রেশন করুন
               </Link>
             </p>
+            
+            {/* Demo Credentials Info */}
+            <div className="pt-3 border-t border-slate-200 dark:border-slate-700">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mb-2">
+                ডেমো লগইন তথ্য:
+              </p>
+              <div className="bg-slate-50 dark:bg-slate-900 rounded-lg p-3 text-xs text-left space-y-1">
+                <p className="text-slate-600 dark:text-slate-400">
+                  <span className="font-semibold">স্টুডেন্ট আইডি:</span> demo
+                </p>
+                <p className="text-slate-600 dark:text-slate-400">
+                  <span className="font-semibold">পাসওয়ার্ড:</span> demo123
+                </p>
+              </div>
+            </div>
+            
             <div className="pt-3 border-t border-slate-200 dark:border-slate-700">
               <Link
                 to="/admin-login"

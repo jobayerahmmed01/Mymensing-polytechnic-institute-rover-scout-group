@@ -51,8 +51,8 @@ const Contact = () => {
           <div className="space-y-6">
             {[
               { icon: MapPin, label: t("contact_address"), value: t("contact_address_text") },
-              { icon: Phone, label: t("contact_phone"), value: "+880 1XXX-XXXXXX" },
-              { icon: Mail, label: t("contact_email_label"), value: "info@mprsg.org" },
+              { icon: Phone, label: t("contact_phone"), value: "ডাটা যুক্ত করা হয়নি" },
+              { icon: Mail, label: t("contact_email_label"), value: "ডাটা যুক্ত করা হয়নি" },
             ].map((it, idx) => (
               <motion.div
                 key={it.label}
