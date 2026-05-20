@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Moon, Sun, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,21 +14,13 @@ import logo from "@/assets/logo.png";
 const Navbar = () => {
   const { t, lang, setLang } = useLanguage();
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [dark, setDark] = useState(false);
   const location = useLocation();
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 30);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", dark);
   }, [dark]);
 
-  // Get active section from current path
   const getActiveSection = () => {
     const path = location.pathname;
     if (path === "/") return "home";
@@ -51,250 +42,135 @@ const Navbar = () => {
   ];
 
   return (
-    <motion.header
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className={`fixed top-3 md:top-4 left-0 right-0 z-50 transition-all duration-300 flex justify-center px-2 md:px-4`}
-    >
-      <nav className={`relative backdrop-blur-2xl bg-slate-900/40 dark:bg-slate-950/40 border border-white/10 dark:border-emerald-500/20 rounded-3xl shadow-2xl px-3 md:px-6 py-2.5 md:py-3 overflow-hidden transition-all duration-300 w-full max-w-7xl`}>
-        {/* Subtle animated gradient overlay */}
-        <motion.div
-          animate={{
-            background: dark ? [
-              "radial-gradient(circle at 0% 0%, rgba(16, 185, 129, 0.03) 0%, transparent 50%)",
-              "radial-gradient(circle at 100% 100%, rgba(245, 158, 11, 0.03) 0%, transparent 50%)",
-              "radial-gradient(circle at 0% 0%, rgba(16, 185, 129, 0.03) 0%, transparent 50%)",
-            ] : [
-              "radial-gradient(circle at 0% 0%, rgba(16, 185, 129, 0.02) 0%, transparent 50%)",
-              "radial-gradient(circle at 100% 100%, rgba(245, 158, 11, 0.02) 0%, transparent 50%)",
-              "radial-gradient(circle at 0% 0%, rgba(16, 185, 129, 0.02) 0%, transparent 50%)",
-            ],
-          }}
-          transition={{ duration: 10, repeat: Infinity }}
-          className="absolute inset-0 -z-10 pointer-events-none"
-        />
-
-        <div className="flex items-center justify-between relative z-10">
-          <Link to="/" className="flex items-center gap-2 group">
-            <div className="relative w-9 h-9 md:w-11 md:h-11 rounded-2xl backdrop-blur-xl bg-gradient-to-br from-emerald-500/20 to-teal-600/20 border border-emerald-400/30 shadow-lg shadow-emerald-500/20 flex items-center justify-center overflow-hidden">
+    <header className="fixed top-3 md:top-4 left-0 right-0 z-50 flex justify-center px-2 md:px-4">
+      <nav className="relative backdrop-blur-xl bg-slate-900/40 dark:bg-slate-950/40 border border-white/10 dark:border-emerald-500/20 rounded-3xl shadow-xl px-3 md:px-6 py-2.5 md:py-3 w-full max-w-7xl">
+        <div className="flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-2">
+            <div className="w-9 h-9 md:w-11 md:h-11 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-600/20 border border-emerald-400/30 flex items-center justify-center">
               <img 
                 src={logo} 
-                alt="MPIRSG logo" 
-                className="w-5 h-5 md:w-7 md:h-7 relative z-10 drop-shadow-lg" 
+                alt="MPIRSG" 
+                className="w-5 h-5 md:w-7 md:h-7" 
               />
             </div>
             <div className="leading-tight">
-              <div className="font-bold text-xs md:text-sm text-emerald-400 dark:text-emerald-300 flex items-center gap-1 drop-shadow-lg">
+              <div className="font-bold text-xs md:text-sm text-emerald-400 dark:text-emerald-300">
                 {t("siteShort")}
               </div>
-              <div className="hidden sm:block text-[9px] md:text-[10px] text-gray-300 dark:text-gray-400 drop-shadow-lg">
+              <div className="hidden sm:block text-[9px] md:text-[10px] text-gray-300 dark:text-gray-400">
                 {t("siteName")}
               </div>
             </div>
           </Link>
 
-          <div className="hidden lg:flex items-center backdrop-blur-xl bg-white/5 dark:bg-white/10 rounded-2xl px-2 py-2 border border-white/10 dark:border-emerald-500/20 shadow-lg">
+          <div className="hidden lg:flex items-center bg-white/5 dark:bg-white/10 rounded-2xl px-2 py-2 border border-white/10">
             <ul className="flex items-center gap-1">
-              {links.map((l, idx) => (
-                <motion.li
-                  key={l.href}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: idx * 0.1, type: "spring", stiffness: 200 }}
-                >
+              {links.map((l) => (
+                <li key={l.href}>
                   <Link
                     to={l.href}
-                    className={`relative text-sm font-semibold px-4 py-2 rounded-xl transition-all duration-300 group overflow-hidden ${
+                    className={`relative text-sm font-semibold px-4 py-2 rounded-xl transition-colors ${
                       activeSection === l.id
-                        ? "text-white"
-                        : "text-gray-300 dark:text-gray-200 hover:text-white"
+                        ? "text-white bg-gradient-to-br from-emerald-500/30 to-teal-600/30"
+                        : "text-gray-300 hover:text-white"
                     }`}
                   >
-                    {/* Glassmorphism background for active state */}
-                    {activeSection === l.id && (
-                      <motion.div
-                        layoutId="navBackground"
-                        className="absolute inset-0 backdrop-blur-xl bg-gradient-to-br from-emerald-500/30 to-teal-600/30 border border-emerald-400/30 rounded-xl shadow-lg shadow-emerald-500/20"
-                        initial={false}
-                        transition={{
-                          type: "spring",
-                          stiffness: 380,
-                          damping: 30,
-                        }}
-                      />
-                    )}
-                    
-                    {/* Subtle hover background for non-active items */}
-                    {activeSection !== l.id && (
-                      <motion.div
-                        className="absolute inset-0 backdrop-blur-xl bg-white/5 dark:bg-white/10 rounded-xl border border-white/10"
-                        initial={{ opacity: 0 }}
-                        whileHover={{ opacity: 1 }}
-                        transition={{ duration: 0.2 }}
-                      />
-                    )}
-                    
-                    {/* Text with drop shadow */}
-                    <span className="relative z-10 drop-shadow-lg">
-                      {l.label}
-                    </span>
+                    {l.label}
                   </Link>
-                </motion.li>
+                </li>
               ))}
             </ul>
           </div>
 
           <div className="flex items-center gap-1.5 md:gap-2">
-            {/* Language Toggle - Simplified */}
             <button
               onClick={() => setLang(lang === "bn" ? "en" : "bn")}
-              className="relative group w-9 h-9 md:w-11 md:h-11"
+              className="w-9 h-9 md:w-11 md:h-11 rounded-2xl bg-gradient-to-br from-blue-500/20 to-indigo-600/20 border border-blue-400/30 flex items-center justify-center transition-transform active:scale-95"
             >
-              <div className={`relative w-full h-full rounded-2xl backdrop-blur-xl border transition-all duration-300 ${
-                lang === "bn"
-                  ? "bg-gradient-to-br from-blue-500/20 to-indigo-600/20 border-blue-400/30 shadow-lg shadow-blue-500/20"
-                  : "bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border-cyan-400/30 shadow-lg shadow-cyan-500/20"
-              }`}>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-xs font-bold text-white drop-shadow-lg">
-                    {lang === "bn" ? "বাং" : "EN"}
-                  </span>
-                </div>
-              </div>
+              <span className="text-xs font-bold text-white">
+                {lang === "bn" ? "বাং" : "EN"}
+              </span>
             </button>
             
-            {/* Theme Toggle - Simplified */}
             <button
               onClick={() => setDark((d) => !d)}
-              className="relative group w-9 h-9 md:w-11 md:h-11"
+              className="w-9 h-9 md:w-11 md:h-11 rounded-2xl bg-gradient-to-br from-amber-400/30 to-orange-500/30 border border-amber-400/40 flex items-center justify-center transition-transform active:scale-95"
             >
-              <div className={`relative w-full h-full rounded-2xl backdrop-blur-xl border transition-all duration-300 ${
-                dark
-                  ? "bg-gradient-to-br from-slate-700/30 to-slate-900/30 border-slate-600/30 shadow-lg shadow-slate-700/20"
-                  : "bg-gradient-to-br from-amber-400/30 to-orange-500/30 border-amber-400/40 shadow-lg shadow-amber-500/30"
-              }`}>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  {dark ? (
-                    <Moon className="w-4 h-4 md:w-5 md:h-5 text-slate-300 drop-shadow-lg" />
-                  ) : (
-                    <Sun className="w-4 h-4 md:w-5 md:h-5 text-amber-500 drop-shadow-lg" />
-                  )}
-                </div>
-              </div>
+              {dark ? <Moon className="w-4 h-4 md:w-5 md:h-5 text-slate-300" /> : <Sun className="w-4 h-4 md:w-5 md:h-5 text-amber-500" />}
             </button>
 
-            {/* Login Button - Ultra Modern Glassmorphism */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                <Button 
+                  variant="ghost"
+                  className="hidden md:flex items-center gap-2 h-11 px-5 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-600/20 border border-emerald-400/30 hover:bg-emerald-500/30 text-white font-semibold transition-colors"
                 >
-                  <Button 
-                    variant="ghost"
-                    className="hidden md:flex items-center gap-2 h-11 px-5 rounded-2xl backdrop-blur-xl bg-gradient-to-br from-emerald-500/20 to-teal-600/20 border border-emerald-400/30 hover:bg-emerald-500/30 text-white font-semibold shadow-lg shadow-emerald-500/20 transition-all duration-300 group relative overflow-hidden"
-                  >
-                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <LogIn className="w-4 h-4 relative z-10 drop-shadow-lg" />
-                    <span className="relative z-10 text-sm drop-shadow-lg">{t("nav_login")}</span>
-                  </Button>
-                </motion.div>
+                  <LogIn className="w-4 h-4" />
+                  <span className="text-sm">{t("nav_login")}</span>
+                </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56 bg-slate-900/95 dark:bg-slate-950/98 backdrop-blur-xl border-white/10 dark:border-emerald-500/20 rounded-2xl shadow-2xl">
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Link to="/student-login">
-                    <DropdownMenuItem className="cursor-pointer py-3 text-gray-300 dark:text-gray-200 hover:text-white focus:bg-emerald-600/20 dark:focus:bg-emerald-500/30 rounded-xl transition-all duration-200">
-                      <LogIn className="w-4 h-4 mr-2" />
-                      {t("nav_login_rover")}
-                    </DropdownMenuItem>
-                  </Link>
-                  <Link to="/admin-login">
-                    <DropdownMenuItem className="cursor-pointer py-3 text-gray-300 dark:text-gray-200 hover:text-white focus:bg-emerald-600/20 dark:focus:bg-emerald-500/30 rounded-xl transition-all duration-200">
-                      <LogIn className="w-4 h-4 mr-2" />
-                      {t("nav_login_admin")}
-                    </DropdownMenuItem>
-                  </Link>
-                </motion.div>
+              <DropdownMenuContent align="end" className="w-56 bg-slate-900/95 backdrop-blur-xl border-white/10 rounded-2xl">
+                <Link to="/student-login">
+                  <DropdownMenuItem className="cursor-pointer py-3 text-gray-300 hover:text-white focus:bg-emerald-600/20 rounded-xl">
+                    <LogIn className="w-4 h-4 mr-2" />
+                    {t("nav_login_rover")}
+                  </DropdownMenuItem>
+                </Link>
+                <Link to="/admin-login">
+                  <DropdownMenuItem className="cursor-pointer py-3 text-gray-300 hover:text-white focus:bg-emerald-600/20 rounded-xl">
+                    <LogIn className="w-4 h-4 mr-2" />
+                    {t("nav_login_admin")}
+                  </DropdownMenuItem>
+                </Link>
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <button
               onClick={() => setOpen(!open)}
-              className="lg:hidden w-11 h-11 rounded-2xl backdrop-blur-xl bg-white/5 dark:bg-white/10 border border-white/10 dark:border-emerald-500/20 flex items-center justify-center text-gray-300 dark:text-gray-200 hover:text-white shadow-lg transition-all duration-300 group relative overflow-hidden"
-              aria-label="Menu"
+              className="lg:hidden w-11 h-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-300 hover:text-white transition-all active:scale-95"
             >
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <motion.div
-                animate={{ rotate: open ? 90 : 0 }}
-                transition={{ duration: 0.3 }}
-                className="relative z-10"
-              >
-                {open ? <X className="w-5 h-5 drop-shadow-lg" /> : <Menu className="w-5 h-5 drop-shadow-lg" />}
-              </motion.div>
-            </motion.button>
+              {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
           </div>
         </div>
 
         {open && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden mt-4 pt-4 border-t border-white/10 dark:border-emerald-500/20"
-          >
+          <div className="lg:hidden mt-4 pt-4 border-t border-white/10">
             <ul className="flex flex-col gap-2">
               {links.map((l) => (
-                <motion.li
-                  key={l.href}
-                  whileHover={{ x: 3 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
+                <li key={l.href}>
                   <Link
                     onClick={() => setOpen(false)}
                     to={l.href}
-                    className={`block py-3 px-4 text-sm font-semibold rounded-xl transition-all duration-200 backdrop-blur-xl border relative overflow-hidden group ${
+                    className={`block py-3 px-4 text-sm font-semibold rounded-xl transition-colors ${
                       activeSection === l.id
-                        ? "text-white bg-gradient-to-br from-emerald-500/30 to-teal-600/30 border-emerald-400/30 shadow-lg shadow-emerald-500/20"
-                        : "text-gray-300 dark:text-gray-200 hover:text-white bg-white/5 dark:bg-white/10 border-white/10 hover:border-white/20"
+                        ? "text-white bg-gradient-to-br from-emerald-500/30 to-teal-600/30"
+                        : "text-gray-300 hover:text-white bg-white/5"
                     }`}
                   >
-                    <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <span className="relative z-10 drop-shadow-lg">{l.label}</span>
+                    {l.label}
                   </Link>
-                </motion.li>
+                </li>
               ))}
-              <li className="pt-2 border-t border-white/10 dark:border-emerald-500/20">
+              <li className="pt-2 border-t border-white/10">
                 <Link to="/student-login" onClick={() => setOpen(false)}>
-                  <button
-                    className="w-full text-left py-3 px-4 text-sm font-medium text-gray-300 dark:text-gray-200 hover:text-white backdrop-blur-xl bg-white/5 dark:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl transition-all duration-200 relative overflow-hidden group"
-                  >
-                    <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <span className="relative z-10 drop-shadow-lg">{t("nav_login_rover")}</span>
+                  <button className="w-full text-left py-3 px-4 text-sm font-medium text-gray-300 hover:text-white bg-white/5 border border-white/10 rounded-xl transition-colors">
+                    {t("nav_login_rover")}
                   </button>
                 </Link>
               </li>
               <li>
                 <Link to="/admin-login" onClick={() => setOpen(false)}>
-                  <button
-                    className="w-full text-left py-3 px-4 text-sm font-medium text-gray-300 dark:text-gray-200 hover:text-white backdrop-blur-xl bg-white/5 dark:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl transition-all duration-200 relative overflow-hidden group"
-                  >
-                    <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <span className="relative z-10 drop-shadow-lg">{t("nav_login_admin")}</span>
+                  <button className="w-full text-left py-3 px-4 text-sm font-medium text-gray-300 hover:text-white bg-white/5 border border-white/10 rounded-xl transition-colors">
+                    {t("nav_login_admin")}
                   </button>
                 </Link>
               </li>
             </ul>
-          </motion.div>
+          </div>
         )}
       </nav>
-    </motion.header>
+    </header>
   );
 };
 
