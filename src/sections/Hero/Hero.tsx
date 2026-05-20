@@ -91,14 +91,16 @@ const Hero = () => {
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
             <Button 
-              id="join"
               size="lg" 
               className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 dark:from-emerald-500 dark:to-emerald-600 dark:hover:from-emerald-600 dark:hover:to-emerald-700 text-white font-bold text-base md:text-lg px-6 md:px-8 py-5 md:py-6 shadow-2xl hover:shadow-emerald-500/50 transition-all duration-300 group relative overflow-hidden border-2 border-white/30"
+              asChild
             >
-              <span className="relative z-10 flex items-center">
-                {t("hero_cta")}
-                <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
-              </span>
+              <a href="/student-login">
+                <span className="relative z-10 flex items-center">
+                  {t("hero_cta")}
+                  <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
+                </span>
+              </a>
             </Button>
           </motion.div>
           
@@ -113,7 +115,7 @@ const Hero = () => {
               className="bg-white/20 backdrop-blur-md border-2 border-white/60 text-white font-bold text-base md:text-lg px-6 md:px-8 py-5 md:py-6 hover:bg-white/30 transition-all duration-300 shadow-2xl hover:shadow-white/30 relative overflow-hidden group" 
               asChild
             >
-              <a href="#activities">
+              <a href="/activities">
                 <span className="relative z-10">{t("hero_cta2")}</span>
               </a>
             </Button>
