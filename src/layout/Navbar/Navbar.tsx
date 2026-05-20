@@ -207,14 +207,18 @@ const Navbar = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <DropdownMenuItem className="cursor-pointer py-3 text-gray-300 dark:text-gray-200 hover:text-white focus:bg-emerald-600/20 dark:focus:bg-emerald-500/30 rounded-xl transition-all duration-200">
-                    <LogIn className="w-4 h-4 mr-2" />
-                    {t("nav_login_rover")}
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="cursor-pointer py-3 text-gray-300 dark:text-gray-200 hover:text-white focus:bg-emerald-600/20 dark:focus:bg-emerald-500/30 rounded-xl transition-all duration-200">
-                    <LogIn className="w-4 h-4 mr-2" />
-                    {t("nav_login_admin")}
-                  </DropdownMenuItem>
+                  <Link to="/student-login">
+                    <DropdownMenuItem className="cursor-pointer py-3 text-gray-300 dark:text-gray-200 hover:text-white focus:bg-emerald-600/20 dark:focus:bg-emerald-500/30 rounded-xl transition-all duration-200">
+                      <LogIn className="w-4 h-4 mr-2" />
+                      {t("nav_login_rover")}
+                    </DropdownMenuItem>
+                  </Link>
+                  <Link to="/admin-login">
+                    <DropdownMenuItem className="cursor-pointer py-3 text-gray-300 dark:text-gray-200 hover:text-white focus:bg-emerald-600/20 dark:focus:bg-emerald-500/30 rounded-xl transition-all duration-200">
+                      <LogIn className="w-4 h-4 mr-2" />
+                      {t("nav_login_admin")}
+                    </DropdownMenuItem>
+                  </Link>
                 </motion.div>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -267,22 +271,24 @@ const Navbar = () => {
                 </motion.li>
               ))}
               <li className="pt-2 border-t border-white/10 dark:border-emerald-500/20">
-                <button
-                  onClick={() => setOpen(false)}
-                  className="w-full text-left py-3 px-4 text-sm font-medium text-gray-300 dark:text-gray-200 hover:text-white backdrop-blur-xl bg-white/5 dark:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl transition-all duration-200 relative overflow-hidden group"
-                >
-                  <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <span className="relative z-10 drop-shadow-lg">{t("nav_login_rover")}</span>
-                </button>
+                <Link to="/student-login" onClick={() => setOpen(false)}>
+                  <button
+                    className="w-full text-left py-3 px-4 text-sm font-medium text-gray-300 dark:text-gray-200 hover:text-white backdrop-blur-xl bg-white/5 dark:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl transition-all duration-200 relative overflow-hidden group"
+                  >
+                    <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <span className="relative z-10 drop-shadow-lg">{t("nav_login_rover")}</span>
+                  </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => setOpen(false)}
-                  className="w-full text-left py-3 px-4 text-sm font-medium text-gray-300 dark:text-gray-200 hover:text-white backdrop-blur-xl bg-white/5 dark:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl transition-all duration-200 relative overflow-hidden group"
-                >
-                  <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <span className="relative z-10 drop-shadow-lg">{t("nav_login_admin")}</span>
-                </button>
+                <Link to="/admin-login" onClick={() => setOpen(false)}>
+                  <button
+                    className="w-full text-left py-3 px-4 text-sm font-medium text-gray-300 dark:text-gray-200 hover:text-white backdrop-blur-xl bg-white/5 dark:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl transition-all duration-200 relative overflow-hidden group"
+                  >
+                    <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <span className="relative z-10 drop-shadow-lg">{t("nav_login_admin")}</span>
+                  </button>
+                </Link>
               </li>
             </ul>
           </motion.div>

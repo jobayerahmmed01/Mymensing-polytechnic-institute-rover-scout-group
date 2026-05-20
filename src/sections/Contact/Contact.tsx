@@ -6,14 +6,22 @@ import { Label } from "@/components/ui/label";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 import { toast } from "@/hooks/use-toast";
+import { useState } from "react";
 
 const Contact = () => {
   const { t } = useLanguage();
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast({ title: "✓", description: t("contact_send") + " ✓" });
-    (e.target as HTMLFormElement).reset();
+    setLoading(true);
+    
+    // Simulate API call
+    setTimeout(() => {
+      setLoading(false);
+      toast({ title: "✓", description: t("contact_send") + " ✓" });
+      (e.target as HTMLFormElement).reset();
+    }, 1500);
   };
 
   return (
@@ -91,6 +99,7 @@ const Contact = () => {
                 id="name"
                 required
                 maxLength={100}
+                disabled={loading}
                 className="mt-1 focus:ring-2 focus:ring-primary transition-all"
                 placeholder={t("contact_name")}
               />
@@ -104,6 +113,7 @@ const Contact = () => {
                 type="email"
                 required
                 maxLength={255}
+                disabled={loading}
                 className="mt-1 focus:ring-2 focus:ring-primary transition-all"
                 placeholder={t("contact_email")}
               />
@@ -117,6 +127,7 @@ const Contact = () => {
                 required
                 maxLength={1000}
                 rows={5}
+                disabled={loading}
                 className="mt-1 focus:ring-2 focus:ring-primary transition-all resize-none"
                 placeholder={t("contact_message")}
               />
@@ -124,10 +135,24 @@ const Contact = () => {
             <Button
               type="submit"
               size="lg"
+              disabled={loading}
               className="w-full gradient-primary shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 group"
             >
-              <Send className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform" />
-              {t("contact_send")}
+              {loading ? (
+                <span className="flex items-center gap-2">
+                  <motion.div
+                    className="w-4 h-4 border-2 border-white border-t-transparent rounded-full"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                  />
+                  পাঠানো হচ্ছে...
+                </span>
+              ) : (
+                <>
+                  <Send className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform" />
+                  {t("contact_send")}
+                </>
+              )}
             </Button>
           </motion.form>
         </div>

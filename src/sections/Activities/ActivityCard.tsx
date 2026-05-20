@@ -1,5 +1,6 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import type { TranslationKey } from "@/data/translations";
 
 interface ActivityCardProps {
@@ -9,6 +10,8 @@ interface ActivityCardProps {
 
 const ActivityCard = ({ img, labelKey }: ActivityCardProps) => {
   const { t } = useLanguage();
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState(false);
 
   return (
     <motion.div
@@ -16,13 +19,28 @@ const ActivityCard = ({ img, labelKey }: ActivityCardProps) => {
       transition={{ duration: 0.3 }}
       className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl aspect-[4/3] cursor-pointer border-4 border-white dark:border-slate-800"
     >
+      {/* Loading Skeleton */}
+      {!loaded && !error && (
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-200 via-slate-300 to-slate-200 dark:from-slate-700 dark:via-slate-600 dark:to-slate-700 animate-pulse" />
+      )}
+      
+      {/* Error State */}
+      {error && (
+        <div className="absolute inset-0 flex items-center justify-center bg-slate-100 dark:bg-slate-800">
+          <p className="text-sm text-slate-500 dark:text-slate-400">ছবি লোড হয়নি</p>
+        </div>
+      )}
+      
       <motion.img
         whileHover={{ scale: 1.1 }}
         transition={{ duration: 0.6 }}
         src={img}
         alt={t(labelKey)}
         loading="lazy"
+        onLoad={() => setLoaded(true)}
+        onError={() => setError(true)}
         className="w-full h-full object-cover"
+        style={{ opacity: loaded ? 1 : 0 }}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent group-hover:from-black/90 transition-all duration-500" />
       
