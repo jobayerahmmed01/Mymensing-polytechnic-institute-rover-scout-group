@@ -5,10 +5,8 @@ import { LogIn, Shield, Lock, Eye, EyeOff, Mail as MailIcon } from "lucide-react
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 const AdminLogin = () => {
-  const { t } = useLanguage();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
